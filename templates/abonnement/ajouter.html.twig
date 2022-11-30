@@ -1,0 +1,19 @@
+<form id="form" action="{{ path('ajouterAbonnement') }}" method="post">
+    <select name="promo">
+        <option value="">--Please choose a Promotion--</option>
+        {% for p in promo %}
+            <option value="{{ p.id }}">{{ p.name }}</option>
+        {% endfor %}
+    </select> <br>
+    <select name="associe">
+        <option value="">--Please choose a Associe--</option>
+        {% for p in associe %}
+            <option value="{{ p.id }}">{{ p.nom }}</option>
+        {% endfor %}
+    </select> <br>
+    <input type="text" name="name" placeholder="Name"> <br>
+    <input type="number" name="price"> <br>
+    <input type="text" name="type" placeholder="Type"> <br>
+    <input type="number" name="rating"> <br>
+    <input type="submit" value="Ajouter"> <br>
+</form>

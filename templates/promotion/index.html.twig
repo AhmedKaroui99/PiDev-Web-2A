@@ -1,0 +1,48 @@
+<input id="search" type="text" placeholder="Search">
+<div id="table">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>value</th>
+            <th>date</th>
+            <th>N days</th>
+            <th>Modifer</th>
+            <th>Supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in promotion %}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.value }}</td>
+                <td>{{ r.date | date }}</td>
+                <td>{{ r.ndays }}</td>
+                <td><a href="{{ path('modifierPromotion', {'id': r.id}) }}"><button >Modifier</button></a></td>
+                <td><a href="{{ path('supprimerPromotion', {'id': r.id}) }}"><button >Supprimer</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<a href="{{ path('ajouterPromotion') }}">Ajouter Promotion</a><br>
+<a href="{{ path('pdfPromotion') }}" target="_blank">Generate PDF</a><br>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script >
+    $(function() {
+        $("#search").keyup(function () {
+            $.ajax({
+                url : "{{ path('SearchPromotion') }}",
+                type: "get",
+                data : { 'search' : $(this).val() }
+            }).done(function (response) {
+                var tableau = $(response).find("table");
+                $('#table').empty();
+                $('#table').append(tableau);
+            })
+        });
+    })
+</script>

@@ -1,0 +1,60 @@
+<input id="search" type="text" placeholder="Search">
+<div id="table">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Promotion</th>
+            <th>Associe</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Modifer</th>
+            <th>Supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in abonnements %}
+            <tr>
+                <td>{{ r.id }}</td>
+                {% for p in promos %}
+                    {% if r.idPromo == p.id %}
+                <td>{{ p.name }}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for a in associes %}
+                    {% if r.idAssocie == a.id %}
+                <td>{{ a.nom }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>{{ r.name }}</td>
+                <td>{{ r.type }}</td>
+                <td>{{ r.price }}</td>
+                <td>{{ r.rating }}</td>
+                <td><a href="{{ path('modifierAbonnement', {'id': r.id}) }}"><button >Modifier</button></a></td>
+                <td><a href="{{ path('supprimerAbonnement', {'id': r.id}) }}"><button >Supprimer</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<a href="{{ path('ajouterAbonnement') }}">Ajouter Abonnement</a><br>
+<a href="{{ path('pdfAbonnement') }}" target="_blank">Generate PDF</a><br>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script >
+    $(function() {
+        $("#search").keyup(function () {
+            $.ajax({
+                url : "{{ path('searchAbonnement') }}",
+                type: "get",
+                data : { 'search' : $(this).val() }
+            }).done(function (response) {
+                var tableau = $(response).find("table");
+                $('#table').empty();
+                $('#table').append(tableau);
+            })
+        });
+    })
+</script>

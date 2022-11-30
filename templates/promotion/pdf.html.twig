@@ -1,0 +1,25 @@
+<input id="search" type="text" placeholder="Search">
+<div id="table">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>value</th>
+            <th>date</th>
+            <th>N days</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in promotion %}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.value }}</td>
+                <td>{{ r.date | date }}</td>
+                <td>{{ r.ndays }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

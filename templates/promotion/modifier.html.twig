@@ -1,0 +1,7 @@
+<form id="form" action="{{ path('modifierPromotion', {'id': promotion.id}) }}" method="post">
+    <input type="text" name="name" placeholder="Name" value="{{ promotion.name }}"> <br>
+    <input type="number" name="value" placeholder="Value" value="{{ promotion.value }}"> <br>
+    <input type="date" name="date" value="{{ promotion.date | date }}"> <br>
+    <input type="number" name="ndays" value="{{ promotion.ndays }}"> <br>
+    <input type="submit" value="Modifier"> <br>
+</form>

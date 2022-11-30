@@ -1,0 +1,37 @@
+<input id="search" type="text" placeholder="Search">
+<div id="table">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Promotion</th>
+            <th>Associe</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in abonnements %}
+            <tr>
+                <td>{{ r.id }}</td>
+                {% for p in promos %}
+                    {% if r.idPromo == p.id %}
+                        <td>{{ p.name }}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for a in associes %}
+                    {% if r.idAssocie == a.id %}
+                        <td>{{ a.nom }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>{{ r.name }}</td>
+                <td>{{ r.type }}</td>
+                <td>{{ r.price }}</td>
+                <td>{{ r.rating }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

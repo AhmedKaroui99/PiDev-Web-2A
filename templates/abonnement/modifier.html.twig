@@ -1,0 +1,19 @@
+<form id="form" action="{{ path('modifierAbonnement', {'id': abon.id}) }}" method="post">
+    <select name="promo">
+        <option value="">--Please choose a Promotion--</option>
+        {% for p in promo %}
+            <option {% if p.id == abon.idPromo %} selected {% endif %} value="{{ p.id }}">{{ p.name }}</option>
+        {% endfor %}
+    </select> <br>
+    <select name="associe">
+        <option value="">--Please choose a Associe--</option>
+        {% for p in associe %}
+            <option {% if p.id == abon.idAssocie %} selected {% endif %} value="{{ p.id }}">{{ p.nom }}</option>
+        {% endfor %}
+    </select> <br>
+    <input type="text" name="name" placeholder="Name" value="{{ abon.name }}"> <br>
+    <input type="number" name="price" value="{{ abon.price }}"> <br>
+    <input type="text" name="type" placeholder="Type" value="{{ abon.type }}"> <br>
+    <input type="number" name="rating" value="{{ abon.rating }}"> <br>
+    <input type="submit" value="Modifier"> <br>
+</form>
